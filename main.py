@@ -11,7 +11,18 @@ from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
 import os
-openai.api_key = st.secrets.OPENAI_API_KEY.key
+from os.path import join, dirname
+import openai
+
+# APIキーの設定
+load_dotenv(join(dirname(__file__), '.env'))
+# load_dotenv: .envファイルを読み込み、その中の環境変数をロードする
+# join: パスを結合する
+# dirname(__file__): このファイルの絶対パスを取得
+# 現在のスクリプトと同じディレクトリにある.envファイルを探し、そのファイルの中にある環境変数をロードする
+# これにより、スクリプト内でos.getenv('MY_VARIABLE')のようなコードを使用して、.envファイルに定義された環境変数を取得することができる
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Sidebar contents
 with st.sidebar:
